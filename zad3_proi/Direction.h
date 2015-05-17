@@ -1,33 +1,37 @@
 #ifndef DIRECTION_H
 #define DIRECTION_H
 
-//#include <string>
-
 class Direction
 {
-	int m_id;
-	int m_distance;
+public:
+	enum Type {D_FORWARD, D_EXIT, D_LEFT, D_RIGHT};
+
+protected:
+	int m_type;
 };
 
 class ForwardDirection : public Direction
 {
 public:
 	ForwardDirection(int distance);
+
+protected:
+	int m_distance;
 };
 
 class ExitDirection : public Direction
 {
 public:
-	ExitDirection(int distance, int choice);
+	ExitDirection(int choice);
 
-private:
+protected:
 	int m_choice;
 };
 
 class LeftDirection : public Direction
 {
 public:
-	LeftDirection(int distance);
+	LeftDirection();
 };
 
 class RightDirection : public Direction
