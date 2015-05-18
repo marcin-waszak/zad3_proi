@@ -21,3 +21,33 @@ RightDirection::RightDirection()
 {
 	m_type = D_RIGHT;
 }
+
+int ForwardDirection::getDistance()
+{
+	return m_distance;
+}
+
+int ExitDirection::getChoice()
+{
+	return m_choice;
+}
+
+void ForwardDirection::accept(Visitor *v)
+{
+	v->visit(this);
+}
+
+void ExitDirection::accept(Visitor *v)
+{
+	v->visit(this);
+}
+
+void LeftDirection::accept(Visitor *v)
+{
+	v->visit(this);
+}
+
+void RightDirection::accept(Visitor *v)
+{
+	v->visit(this);
+}
