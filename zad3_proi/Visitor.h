@@ -26,8 +26,6 @@ public:
 	void visit(LeftDirection*);
 	void visit(RightDirection*);
 
-private:
-	int index = 0;
 };
 
 class CheckLeftVisitor : public Visitor
