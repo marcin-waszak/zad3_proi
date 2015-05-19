@@ -2,13 +2,14 @@
 #define SCHEDULE_H
 
 #include <vector>
+#include <string>
 #include "Direction.h"
 
 class Schedule
 {
 public:
 	~Schedule();
-	void addForward(int distance);
+	void addForward(int distance); // const int dist. ?
 	void addExit(int choice);
 	void addLeft();
 	void addRight();
@@ -17,8 +18,12 @@ public:
 	void insertLeft(size_t position);
 	void insertRight(size_t position);
 	void erase(size_t position);
+	void printAll();
+	void saveFile(std::string fileName);
 
-protected:
+	void accept(Visitor *visitor);
+
+private:
 	std::vector<Direction*> m_vector;
 };
 
