@@ -80,3 +80,28 @@ void Schedule::erase(size_t position)
 	m_vector.erase(m_vector.begin() + position);
 	delete p_direction;
 }
+
+void Schedule::printAll()
+{
+	for(auto current : m_vector)
+	{
+		static int i = 0;
+		std::cout << i++ << ". ";
+		PrintVisitor p_visitor;
+		current->accept(&p_visitor);
+	}
+	
+}
+
+void Schedule::saveFile(std::string fileName)
+{
+	std::fstream file(fileName, std::ios::out);
+
+	for(auto current : m_vector)
+	{
+		PrintFileVisitor p_visitor(&file);
+		current->accept(&p_visitor);
+	}
+
+	file.close();
+}

@@ -25,22 +25,22 @@ void PrintVisitor::visit(RightDirection *p)
 
 // Print to a file visitor
 
-void printFileVisitor::visit(ForwardDirection *p)
+void PrintFileVisitor::visit(ForwardDirection *p)
 {
 	*m_inputFile << "Prosto " << p->getDistance() << "m" << std::endl;
 }
 
-void printFileVisitor::visit(ExitDirection *p)
+void PrintFileVisitor::visit(ExitDirection *p)
 {
 	*m_inputFile << "Zjazd nr " << p->getChoice() << std::endl;
 }
 
-void printFileVisitor::visit(LeftDirection *p)
+void PrintFileVisitor::visit(LeftDirection *p)
 {
 	*m_inputFile << "W prawo" << std::endl;
 }
 
-void printFileVisitor::visit(RightDirection *p)
+void PrintFileVisitor::visit(RightDirection *p)
 {
 	*m_inputFile << "W prawo" << std::endl;
 }
@@ -71,6 +71,6 @@ void CheckLeftVisitor::visit(RightDirection *p)
 	*m_left = false;
 }
 
-printFileVisitor::printFileVisitor(std::fstream *inputFile) : m_inputFile(inputFile)
+PrintFileVisitor::PrintFileVisitor(std::fstream *inputFile) : m_inputFile(inputFile)
 {
 }

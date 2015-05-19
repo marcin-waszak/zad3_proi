@@ -41,10 +41,10 @@ private:
 	bool *m_left;
 };
 
-class printFileVisitor : public Visitor
+class PrintFileVisitor : public Visitor
 {
 public:
-	printFileVisitor(std::fstream *inputFile);
+	PrintFileVisitor(std::fstream *inputFile);
 	void visit(ForwardDirection*);
 	void visit(ExitDirection*);
 	void visit(LeftDirection*);

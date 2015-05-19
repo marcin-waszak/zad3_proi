@@ -2,12 +2,17 @@
 
 int main()
 {
-	std::fstream output_file("plik.txt", std::ios::out);
-	printFileVisitor fprint_visitor(&output_file);
-	RightDirection obj;
-	obj.accept(&fprint_visitor);
+	Schedule main_schedule;
+	main_schedule.addForward(66);
+	main_schedule.addForward(777);
+	main_schedule.addExit(4);
+	main_schedule.addLeft();
+	main_schedule.addRight();
+	main_schedule.addExit(2);
+	main_schedule.addLeft();
 
-	output_file.close();
+	main_schedule.printAll();
+	main_schedule.saveFile("plik2.txt");
 
 	return 0;
 }
