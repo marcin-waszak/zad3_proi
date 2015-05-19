@@ -1,4 +1,6 @@
 #include "Schedule.h"
+#include <algorithm>
+#include <functional>
 
 Schedule::~Schedule()
 {
@@ -83,25 +85,20 @@ void Schedule::erase(size_t position)
 
 void Schedule::printAll()
 {
-	for(auto current : m_vector)
-	{
-		static int i = 0;
-		std::cout << i++ << ". ";
-		PrintVisitor p_visitor;
-		current->accept(&p_visitor);
-	}
-	
+	accept(&PrintVisitor());
 }
 
-void Schedule::saveFile(std::string fileName)
+void Schedule::saveFile(std::string fileName) // TODO: exceptions here
 {
 	std::fstream file(fileName, std::ios::out);
-
-	for(auto current : m_vector)
-	{
-		PrintFileVisitor p_visitor(&file);
-		current->accept(&p_visitor);
-	}
-
+	accept(&PrintFileVisitor(&file));
 	file.close();
+}
+
+using namespace std;
+using namespace std::placeholders;
+
+void Schedule::accept(Visitor *visitor) {
+	for_each(m_vector.begin(), m_vector.end(),
+		bind(&Direction::accept, _1, visitor));
 }

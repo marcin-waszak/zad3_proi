@@ -11,6 +11,8 @@ int main()
 	main_schedule.addExit(2);
 	main_schedule.addLeft();
 
+	main_schedule.erase(5); //
+
 	main_schedule.printAll();
 	main_schedule.saveFile("plik2.txt");
 
