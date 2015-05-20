@@ -1,4 +1,12 @@
 #include "Schedule.h"
+#include "Utilities.h"
+#include "Visitor.h"
+
+class UserInterface
+{
+public:
+	void UserInterface::putError(std::string error);
+};
 
 Schedule::~Schedule()
 {
@@ -98,6 +106,7 @@ void Schedule::printAll()
 
 void Schedule::saveFile(std::string fileName)
 {
+	bool catch_flag = false;
 	try
 	{
 		std::ofstream file(fileName, std::ios::binary);
@@ -111,24 +120,29 @@ void Schedule::saveFile(std::string fileName)
 	}
 	catch(std::ios_base::failure &fail)
 	{
-		std::cout << "Nie mozna zapisac " << fileName << std::endl
-			<< fail.what() << std::endl;
+		catch_flag = true;
+		std::stringstream ss_error;
+		ss_error << "Nie mozna zapisac " << fileName << std::endl << fail.what();
+		Utilities::putError(ss_error.str());
 	}
+	if(!catch_flag) Utilities::putSuccess("Zapisano pomyslnie!");
 }
 
 void Schedule::loadFile(std::string fileName)
 {
+	bool catch_flag = false;
 	int temp;
 	clear();
 
 	try
 	{
 		std::ifstream file(fileName);
-		file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-		while(!file.eof())
+		auto old = file.exceptions();
+		file.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+		file.exceptions(old);
+		while(file.read(reinterpret_cast<char*>(&temp), sizeof(temp)))
 		{
-			file.read(reinterpret_cast<char*>(&temp), sizeof(temp));
-
+			file.exceptions(file.failbit | file.badbit | file.eofbit);
 			switch(temp)
 			{
 			case Direction::Type::D_FORWARD:
@@ -149,14 +163,19 @@ void Schedule::loadFile(std::string fileName)
 				this->addRight();
 				break;
 			}
+
+			file.exceptions(old);
 		}
 	}
 	catch(std::ios_base::failure &fail)
 	{
-//		clear();
-		std::cout << "Blad odczytu " << fileName << std::endl
-			<< fail.what() << std::endl;
+		catch_flag = true;
+		clear();
+		std::stringstream ss_error;
+		ss_error << "Blad odczytu " << fileName << std::endl << fail.what();
+		Utilities::putError(ss_error.str());
 	}
+	if(!catch_flag) Utilities::putSuccess("Wczytano pomyslnie!");
 }
 
 size_t Schedule::getSize()

@@ -81,12 +81,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Schedule.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Visitor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Schedule.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="Visitor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,8 +9,8 @@ public:
 	UserInterface(Schedule *schedule);
 	int getValue(std::string input, int max, int min = 0);
 	std::string getString(std::string input);
-	bool isInteger(std::string input);
 
+	void printHead();
 	void mainMenu();
 	void addMenu();
 	void insertMenu();
@@ -20,8 +20,7 @@ public:
 	void saveMenu();
 	void loadMenu();
 	void exitMenu();
-	void badChoiceMenu();
-//	void putError(std::string error);
+//	void badChoiceMenu();
 
 private:
 	Schedule *m_schedule;
