@@ -3,62 +3,73 @@
 
 // Print on the screen visitor
 
+PrintVisitor::PrintVisitor(int current) : m_current(current)
+{
+}
+
 void PrintVisitor::visit(ForwardDirection *p)
 {
-	std::cout << "Prosto " << p->getDistance() << "m" << std::endl;
+	std::cout << m_current << ". Prosto " << p->getDistance() << " m" << std::endl;
 }
 
 void PrintVisitor::visit(ExitDirection *p)
 {
-	std::cout << "Zjazd nr " << p->getChoice() << std::endl;
+	std::cout << m_current << ". Zjazd nr " << p->getChoice() << std::endl;
 }
 
 void PrintVisitor::visit(LeftDirection *p)
 {
-	std::cout << "W lewo" << std::endl;
+	std::cout << m_current << ". W lewo" << std::endl;
 }
 
 void PrintVisitor::visit(RightDirection *p)
 {
-	std::cout << "W prawo" << std::endl;
+	std::cout << m_current << ". W prawo" << std::endl;
 }
 
 // Print to a file visitor
 
 void PrintFileVisitor::visit(ForwardDirection *p)
 {
-	*m_inputFile << "Prosto " << p->getDistance() << "m" << std::endl;
+	int direction = Direction::Type::D_FORWARD;
+	int distance = p->getDistance();
+	m_inputFile->write(reinterpret_cast<char*>(&direction), sizeof(int));
+	m_inputFile->write(reinterpret_cast<char*>(&distance), sizeof(int));
 }
 
 void PrintFileVisitor::visit(ExitDirection *p)
 {
-	*m_inputFile << "Zjazd nr " << p->getChoice() << std::endl;
+	int direction = Direction::Type::D_EXIT;
+	int choice = p->getChoice();
+	m_inputFile->write(reinterpret_cast<char*>(&direction), sizeof(int));
+	m_inputFile->write(reinterpret_cast<char*>(&choice), sizeof(int));
 }
 
 void PrintFileVisitor::visit(LeftDirection *p)
 {
-	*m_inputFile << "W prawo" << std::endl;
+	int direction = Direction::Type::D_LEFT;
+	m_inputFile->write(reinterpret_cast<char*>(&direction), sizeof(int));
 }
 
 void PrintFileVisitor::visit(RightDirection *p)
 {
-	*m_inputFile << "W prawo" << std::endl;
+	int direction = Direction::Type::D_RIGHT;
+	m_inputFile->write(reinterpret_cast<char*>(&direction), sizeof(int));
 }
 
 CheckLeftVisitor::CheckLeftVisitor(bool *flag) : m_left(flag)
 {
+	*m_left = false;
 }
 
 // Turn-left check visitor
 
 void CheckLeftVisitor::visit(ForwardDirection *p)
-{
-	*m_left = false;
+{	
 }
 
 void CheckLeftVisitor::visit(ExitDirection *p)
 {
-	*m_left = false;
 }
 
 void CheckLeftVisitor::visit(LeftDirection *p)
@@ -68,9 +79,8 @@ void CheckLeftVisitor::visit(LeftDirection *p)
 
 void CheckLeftVisitor::visit(RightDirection *p)
 {
-	*m_left = false;
 }
 
-PrintFileVisitor::PrintFileVisitor(std::fstream *inputFile) : m_inputFile(inputFile)
+PrintFileVisitor::PrintFileVisitor(std::ofstream *inputFile) : m_inputFile(inputFile)
 {
 }

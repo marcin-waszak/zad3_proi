@@ -21,11 +21,14 @@ public:
 class PrintVisitor : public Visitor
 {
 public:
+	PrintVisitor(int current);
 	void visit(ForwardDirection*);
 	void visit(ExitDirection*);
 	void visit(LeftDirection*);
 	void visit(RightDirection*);
 
+private:
+	int m_current;
 };
 
 class CheckLeftVisitor : public Visitor
@@ -44,14 +47,14 @@ private:
 class PrintFileVisitor : public Visitor
 {
 public:
-	PrintFileVisitor(std::fstream *inputFile);
+	PrintFileVisitor(std::ofstream *inputFile);
 	void visit(ForwardDirection*);
 	void visit(ExitDirection*);
 	void visit(LeftDirection*);
 	void visit(RightDirection*);
 
 private:
-	std::fstream *m_inputFile;
+	std::ofstream *m_inputFile;
 };
 
 #endif

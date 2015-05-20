@@ -18,10 +18,11 @@ public:
 	void insertLeft(size_t position);
 	void insertRight(size_t position);
 	void erase(size_t position);
+	void clear();
 	void printAll();
 	void saveFile(std::string fileName);
-
-	void accept(Visitor *visitor);
+	void loadFile(std::string fileName);
+	size_t getSize();
 
 private:
 	std::vector<Direction*> m_vector;
