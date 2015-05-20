@@ -2,12 +2,6 @@
 #include "Utilities.h"
 #include "Visitor.h"
 
-class UserInterface
-{
-public:
-	void UserInterface::putError(std::string error);
-};
-
 Schedule::~Schedule()
 {
 	clear();
@@ -132,7 +126,6 @@ void Schedule::loadFile(std::string fileName)
 {
 	bool catch_flag = false;
 	int temp;
-	clear();
 
 	try
 	{
@@ -176,6 +169,26 @@ void Schedule::loadFile(std::string fileName)
 		Utilities::putError(ss_error.str());
 	}
 	if(!catch_flag) Utilities::putSuccess("Wczytano pomyslnie!");
+}
+
+int Schedule::getID(size_t position)
+{
+	int id;
+	GetIDVisitor p_visitor(&id);
+	m_vector[position]->accept(&p_visitor);
+	return id;
+}
+
+bool Schedule::detectLeft()
+{
+	int id;
+	for(auto current : m_vector)
+	{
+		GetIDVisitor p_visitor(&id);
+		current->accept(&p_visitor);
+		if(id == Direction::Type::D_LEFT) return true;
+	}
+	return false;
 }
 
 size_t Schedule::getSize()

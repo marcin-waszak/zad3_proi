@@ -22,6 +22,8 @@ public:
 	void printAll();
 	void saveFile(std::string fileName);
 	void loadFile(std::string fileName);
+	int	getID(size_t position);
+	bool detectLeft();
 	size_t getSize();
 
 private:

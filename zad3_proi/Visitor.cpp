@@ -29,6 +29,10 @@ void PrintVisitor::visit(RightDirection *p)
 
 // Print to a file visitor
 
+PrintFileVisitor::PrintFileVisitor(std::ofstream *inputFile) : m_inputFile(inputFile)
+{
+}
+
 void PrintFileVisitor::visit(ForwardDirection *p)
 {
 	int direction = Direction::Type::D_FORWARD;
@@ -57,30 +61,28 @@ void PrintFileVisitor::visit(RightDirection *p)
 	m_inputFile->write(reinterpret_cast<char*>(&direction), sizeof(int));
 }
 
-CheckLeftVisitor::CheckLeftVisitor(bool *flag) : m_left(flag)
-{
-	*m_left = false;
-}
+// Get ID visitor
 
-// Turn-left check visitor
-
-void CheckLeftVisitor::visit(ForwardDirection *p)
-{	
-}
-
-void CheckLeftVisitor::visit(ExitDirection *p)
+GetIDVisitor::GetIDVisitor(int *id) : m_id(id)
 {
 }
 
-void CheckLeftVisitor::visit(LeftDirection *p)
+void GetIDVisitor::visit(ForwardDirection *p)
 {
-	*m_left = true;
+	*m_id = Direction::Type::D_FORWARD;
 }
 
-void CheckLeftVisitor::visit(RightDirection *p)
+void GetIDVisitor::visit(ExitDirection *p)
 {
+	*m_id = Direction::Type::D_EXIT;
 }
 
-PrintFileVisitor::PrintFileVisitor(std::ofstream *inputFile) : m_inputFile(inputFile)
+void GetIDVisitor::visit(LeftDirection *p)
 {
+	*m_id = Direction::Type::D_LEFT;
+}
+
+void GetIDVisitor::visit(RightDirection *p)
+{
+	*m_id = Direction::Type::D_RIGHT;
 }

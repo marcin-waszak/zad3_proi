@@ -28,8 +28,6 @@ private:
 //	static const int ERR_CHOICE = 0xFF;
 	static const int MAX_DISTANCE = 1000000000;
 	static const int MAX_EXIT = 16;
-
-
 };
 
 #endif

@@ -217,6 +217,8 @@ void UserInterface::printMenu()
 		Utilities::putWarning("< lista wskazowek jest pusta >");
 		return;
 	}
+	if(m_schedule->detectLeft())
+		Utilities::putWarning("UWAGA: Trasa zawiera lewoskret!");
 	m_schedule->printAll();
 }
 
@@ -241,7 +243,10 @@ void UserInterface::loadMenu()
 
 	name = getString("Podaj nazwe pliku do wczytania: ");
 	if(name.size() != 0)
+	{
+		m_schedule->clear();
 		m_schedule->loadFile(name);
+	}
 }
 
 void UserInterface::exitMenu()

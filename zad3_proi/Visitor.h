@@ -31,17 +31,17 @@ private:
 	int m_current;
 };
 
-class CheckLeftVisitor : public Visitor
+class GetIDVisitor : public Visitor
 {
 public:
-	CheckLeftVisitor(bool *flag);
+	GetIDVisitor(int *id);
 	void visit(ForwardDirection*);
 	void visit(ExitDirection*);
 	void visit(LeftDirection*);
 	void visit(RightDirection*);
 
 private:
-	bool *m_left;
+	int *m_id;
 };
 
 class PrintFileVisitor : public Visitor

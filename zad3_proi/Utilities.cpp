@@ -16,7 +16,7 @@ void Utilities::putSuccess(std::string input)
 	std::cout << input << std::endl;
 #elif __linux__
 	// ANSI escape code for color only on Linux
-	std::cout << "\x1n[32m" << input << "\x1b[0m" << std::endl;
+	std::cout << "\x1b[0;32m" << input << "\x1b[0m" << std::endl;
 #endif
 }
 
