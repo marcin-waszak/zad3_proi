@@ -88,7 +88,7 @@ void Schedule::clear()
 		erase(vectorSize - i - 1);
 }
 
-void Schedule::printAll()
+void Schedule::printAll() const
 {
 	int i = 0;
 	for(auto current : m_vector)
@@ -98,7 +98,7 @@ void Schedule::printAll()
 	}	
 }
 
-void Schedule::saveFile(std::string fileName)
+void Schedule::saveFile(std::string fileName) const
 {
 	bool catch_flag = false;
 	try
@@ -171,7 +171,7 @@ void Schedule::loadFile(std::string fileName)
 	if(!catch_flag) Utilities::putSuccess("Wczytano pomyslnie!");
 }
 
-int Schedule::getID(size_t position)
+int Schedule::getID(size_t position) const
 {
 	int id;
 	GetIDVisitor p_visitor(&id);
@@ -179,7 +179,7 @@ int Schedule::getID(size_t position)
 	return id;
 }
 
-bool Schedule::detectLeft()
+bool Schedule::detectLeft() const
 {
 	int id;
 	for(auto current : m_vector)
@@ -191,7 +191,7 @@ bool Schedule::detectLeft()
 	return false;
 }
 
-size_t Schedule::getSize()
+size_t Schedule::getSize() const
 {
 	return m_vector.size();
 }

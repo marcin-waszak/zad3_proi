@@ -5,7 +5,7 @@ UserInterface::UserInterface(Schedule *schedule) : m_schedule(schedule)
 {
 }
 
-int UserInterface::getValue(std::string label, int max, int min)
+int UserInterface::getValue(std::string label, int max, int min) const
 {
 	std::string value;
 	int result;
@@ -23,7 +23,7 @@ int UserInterface::getValue(std::string label, int max, int min)
 	return result;
 }
 
-std::string UserInterface::getString(std::string label)
+std::string UserInterface::getString(std::string label) const
 {
 	std::string output;
 //	while(1)
@@ -37,7 +37,7 @@ std::string UserInterface::getString(std::string label)
 	return output;
 }
 
-void UserInterface::printHead()
+void UserInterface::printHead() const
 {
 	std::cout << std::endl
 		<< "------------------------------------------------\n"
@@ -88,7 +88,7 @@ void UserInterface::addMenu()
 		<< "1. Zjazd\n"
 		<< "2. W lewo\n"
 		<< "3. W prawo\n"
-		<< "4. Powrot\n";
+		<< "4. Powrot do menu glownego\n";
 
 	choice = getValue("Dokonaj wybroru [0 - 4]: ", 4);
 
@@ -145,7 +145,7 @@ void UserInterface::insertMenu()
 		<< "1. Zjazd\n"
 		<< "2. W lewo\n"
 		<< "3. W prawo\n"
-		<< "4. Powrot\n";
+		<< "4. Powrot do menu glownego\n";
 
 		choice = getValue("Dokonaj wybroru [0 - 4]: ", 4);
 		if(choice == 4) return;
@@ -209,7 +209,7 @@ void UserInterface::clearMenu()
 	}
 }
 
-void UserInterface::printMenu()
+void UserInterface::printMenu() const
 {
 	std::cout << "\nWyswietlanie listy\n";
 	if(m_schedule->getSize() == 0)

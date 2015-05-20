@@ -1,5 +1,9 @@
 #include "Direction.h"
 
+Direction::~Direction()
+{
+}
+
 ForwardDirection::ForwardDirection(int distance)
 {
 	m_type = D_FORWARD;
@@ -22,12 +26,12 @@ RightDirection::RightDirection()
 	m_type = D_RIGHT;
 }
 
-int ForwardDirection::getDistance()
+int ForwardDirection::getDistance() const
 {
 	return m_distance;
 }
 
-int ExitDirection::getChoice()
+int ExitDirection::getChoice() const
 {
 	return m_choice;
 }

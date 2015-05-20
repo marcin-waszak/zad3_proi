@@ -8,7 +8,7 @@
 class Schedule
 {
 public:
-	~Schedule();
+	/*virtual*/ ~Schedule();
 	void addForward(int distance); // const int dist. ?
 	void addExit(int choice);
 	void addLeft();
@@ -19,12 +19,12 @@ public:
 	void insertRight(size_t position);
 	void erase(size_t position);
 	void clear();
-	void printAll();
-	void saveFile(std::string fileName);
+	void printAll() const;
+	void saveFile(std::string fileName) const;
 	void loadFile(std::string fileName);
-	int	getID(size_t position);
-	bool detectLeft();
-	size_t getSize();
+	int	getID(size_t position) const;
+	bool detectLeft() const;
+	size_t getSize() const;
 
 private:
 	std::vector<Direction*> m_vector;

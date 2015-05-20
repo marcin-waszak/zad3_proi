@@ -6,8 +6,9 @@
 class Direction
 {
 public:
-	enum Type {D_FORWARD, D_EXIT, D_LEFT, D_RIGHT};
+	virtual ~Direction();
 	virtual void accept(class Visitor*) = 0;
+	enum Type {D_FORWARD, D_EXIT, D_LEFT, D_RIGHT};
 
 protected:
 	int m_type;
@@ -17,7 +18,7 @@ class ForwardDirection : public Direction
 {
 public:
 	ForwardDirection(int distance);
-	int getDistance();
+	int getDistance() const;
 	void accept(Visitor*);
 
 protected:
@@ -28,7 +29,7 @@ class ExitDirection : public Direction
 {
 public:
 	ExitDirection(int choice);
-	int getChoice();
+	int getChoice() const;
 	void accept(Visitor*);
 
 protected:
