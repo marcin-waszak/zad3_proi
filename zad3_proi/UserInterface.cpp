@@ -26,6 +26,7 @@ std::string UserInterface::getString(std::string input)
 {
 	std::string output;
 	std::cin >> output;
+	std::cin.clear();
 	return output;
 }
 
@@ -83,7 +84,7 @@ void UserInterface::addMenu()
 		<< "3. W prawo\n"
 		<< "4. Powrot\n";
 
-	while(1)
+//	while(1)
 	{
 		choice = getValue("Dokonaj wybroru [0 - 4]: ", 4);
 
@@ -108,7 +109,7 @@ void UserInterface::addMenu()
 		default:
 			std::cout << "Cos poszlo nie tak!" << std::endl;//err
 		}
-		break;
+	//	break;
 	}
 }
 
@@ -127,7 +128,7 @@ void UserInterface::insertMenu()
 		<< "3. W prawo\n"
 		<< "4. Powrot\n";
 
-	while(1)
+//	while(1)
 	{
 		place = getValue("Wybierz miejsce na liscie wskazowek: ", m_schedule->getSize() - 1);
 		choice = getValue("Dokonaj wybroru [0 - 4]: ", 4);
@@ -153,7 +154,7 @@ void UserInterface::insertMenu()
 		default:
 			std::cout << "Cos poszlo nie tak!" << std::endl;//err
 		}
-		break;
+//		break;
 	}
 }
 
@@ -168,12 +169,12 @@ void UserInterface::eraseMenu()
 		return;
 	}
 
-	while(1)
+//	while(1)
 	{
 		place = getValue("Wybierz numer wskazowki: ", m_schedule->getSize() - 1);
 		m_schedule->erase(place);
 		break;
-	}
+//	}
 }
 
 void UserInterface::clearMenu()
@@ -184,13 +185,13 @@ void UserInterface::clearMenu()
 		<< "0. Rezygnuje\n"
 		<< "1. Potwierdzam\n";
 
-	while(1)
+//	while(1)
 	{
 		decision = getValue("Decyzja [0 - 1]: ", 1);
 		if(decision == 1)
 			m_schedule->clear();
 		break;
-	}
+//	}
 }
 
 void UserInterface::printMenu()
@@ -233,12 +234,12 @@ void UserInterface::exitMenu()
 		<< "0. Rezygnuje\n"
 		<< "1. Potwierdzam\n";
 
-	while(1)
+//	while(1)
 	{
 		decision = getValue("Decyzja [0 - 1]: ", 1);
 		if(decision == 1)
 			exit(0);
-		break;
+//		break;
 	}	
 }
 
