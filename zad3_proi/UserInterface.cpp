@@ -15,6 +15,7 @@ int UserInterface::getValue(std::string label, int max, int min) const
 		std::getline(std::cin, value);
 		std::cin.clear();
 //		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		if(value.size() < 1) continue;
 		if(!Utilities::isInteger(value)) continue;
 		else result = atoi(value.c_str());
 		if(result < min || result > max) continue;
@@ -50,7 +51,8 @@ void UserInterface::mainMenu()
 	while(1)
 	{
 		printHead();
-		std::cout << std::endl
+		std::stringstream temp;
+		temp << std::endl
 			<< "0. Dodaj wskazowke\n"
 			<< "1. Wstaw wskazowke\n"
 			<< "2. Skasuj wskazowke\n"
@@ -58,9 +60,10 @@ void UserInterface::mainMenu()
 			<< "4. Wyswietl aktualne wskazowki\n"
 			<< "5. Zapisz aktualne wskazowki\n"
 			<< "6. Wczytaj wskazowki z pliku\n"
-			<< "7. Zakoncz dzialanie programu\n";			
+			<< "7. Zakoncz dzialanie programu\n"
+			<< "Dokonaj wybroru [0 - 7]: ";
 
-		choice = getValue("Dokonaj wybroru [0 - 7]: ", 7);
+		choice = getValue(temp.str(), 7);
 		switch(choice)
 		{
 			case 0: addMenu(); break;
@@ -82,15 +85,17 @@ void UserInterface::addMenu()
 	int distance;
 	int c_exit;
 
-	std::cout << std::endl
+	std::stringstream temp;
+	temp << std::endl
 		<< "Dodawanie wskazowki\n"
 		<< "0. Jedz prosto\n"
 		<< "1. Zjazd\n"
 		<< "2. W lewo\n"
 		<< "3. W prawo\n"
-		<< "4. Powrot do menu glownego\n";
+		<< "4. Powrot do menu glownego\n"
+		<< "Dokonaj wybroru [0 - 4]: ";
 
-	choice = getValue("Dokonaj wybroru [0 - 4]: ", 4);
+	choice = getValue(temp.str(), 4);
 
 	switch(choice)
 	{
@@ -140,14 +145,18 @@ void UserInterface::insertMenu()
 
 	std::cout << std::endl << "Wstawianie wskazowki\n";
 	place = getValue(ss_label.str(), schedule_size - 1);
-	std::cout
+
+	std::stringstream temp;
+	temp << std::endl
+		<< "Dodawanie wskazowki\n"
 		<< "0. Jedz prosto\n"
 		<< "1. Zjazd\n"
 		<< "2. W lewo\n"
 		<< "3. W prawo\n"
-		<< "4. Powrot do menu glownego\n";
+		<< "4. Powrot do menu glownego\n"
+		<< "Dokonaj wybroru [0 - 4]: ";
 
-		choice = getValue("Dokonaj wybroru [0 - 4]: ", 4);
+	choice = getValue(temp.str(), 4);
 		if(choice == 4) return;
 
 	switch(choice)
@@ -197,11 +206,19 @@ void UserInterface::clearMenu()
 {
 	int decision;
 	Utilities::putWarning("\nCzyszczenie calej listy wskazowek");
+
+	std::stringstream temp;
+	temp << std::endl
+		<< "Wyczyscic?\n"
+		<< "0. Rezygnuje\n"
+		<< "1. Potwierdzam\n"
+		<< "Decyzja [0 - 1]: ";
+
+	decision = getValue(temp.str(), 1);
 		std::cout
 		<< "0. Rezygnuje\n"
 		<< "1. Potwierdzam\n";
 
-	decision = getValue("Decyzja [0 - 1]: ", 1);
 	if(decision == 1)
 	{
 		m_schedule->clear();
@@ -253,12 +270,18 @@ void UserInterface::exitMenu()
 {
 	int decision;
 	Utilities::putWarning("\nCzyszczenie calej listy wskazowek");
-	std::cout
-		<< "Czy na pewno chcesz opuscic program?\n"
+	std::stringstream temp;
+	temp << std::endl
+		<< "Czy napewno opuscic program?\n"
+		<< "0. Rezygnuje\n"
+		<< "1. Potwierdzam\n"
+		<< "Decyzja [0 - 1]: ";
+
+	decision = getValue(temp.str(), 1);
+		std::cout
 		<< "0. Rezygnuje\n"
 		<< "1. Potwierdzam\n";
 
-	decision = getValue("Decyzja [0 - 1]: ", 1);
 	if(decision == 1)
 		exit(0);
 }
